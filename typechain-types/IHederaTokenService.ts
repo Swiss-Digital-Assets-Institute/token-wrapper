@@ -21,15 +21,16 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "./common";
 
 export declare namespace IHederaTokenService {
   export type KeyValueStruct = {
-    inheritAccountKey: boolean;
-    contractId: string;
-    ed25519: BytesLike;
-    ECDSA_secp256k1: BytesLike;
-    delegatableContractId: string;
+    inheritAccountKey: PromiseOrValue<boolean>;
+    contractId: PromiseOrValue<string>;
+    ed25519: PromiseOrValue<BytesLike>;
+    ECDSA_secp256k1: PromiseOrValue<BytesLike>;
+    delegatableContractId: PromiseOrValue<string>;
   };
 
   export type KeyValueStructOutput = [
@@ -47,7 +48,7 @@ export declare namespace IHederaTokenService {
   };
 
   export type TokenKeyStruct = {
-    keyType: BigNumberish;
+    keyType: PromiseOrValue<BigNumberish>;
     key: IHederaTokenService.KeyValueStruct;
   };
 
@@ -57,9 +58,9 @@ export declare namespace IHederaTokenService {
   ] & { keyType: BigNumber; key: IHederaTokenService.KeyValueStructOutput };
 
   export type ExpiryStruct = {
-    second: BigNumberish;
-    autoRenewAccount: string;
-    autoRenewPeriod: BigNumberish;
+    second: PromiseOrValue<BigNumberish>;
+    autoRenewAccount: PromiseOrValue<string>;
+    autoRenewPeriod: PromiseOrValue<BigNumberish>;
   };
 
   export type ExpiryStructOutput = [BigNumber, string, BigNumber] & {
@@ -69,13 +70,13 @@ export declare namespace IHederaTokenService {
   };
 
   export type HederaTokenStruct = {
-    name: string;
-    symbol: string;
-    treasury: string;
-    memo: string;
-    tokenSupplyType: boolean;
-    maxSupply: BigNumberish;
-    freezeDefault: boolean;
+    name: PromiseOrValue<string>;
+    symbol: PromiseOrValue<string>;
+    treasury: PromiseOrValue<string>;
+    memo: PromiseOrValue<string>;
+    tokenSupplyType: PromiseOrValue<boolean>;
+    maxSupply: PromiseOrValue<BigNumberish>;
+    freezeDefault: PromiseOrValue<boolean>;
     tokenKeys: IHederaTokenService.TokenKeyStruct[];
     expiry: IHederaTokenService.ExpiryStruct;
   };
@@ -103,11 +104,11 @@ export declare namespace IHederaTokenService {
   };
 
   export type FixedFeeStruct = {
-    amount: BigNumberish;
-    tokenId: string;
-    useHbarsForPayment: boolean;
-    useCurrentTokenForPayment: boolean;
-    feeCollector: string;
+    amount: PromiseOrValue<BigNumberish>;
+    tokenId: PromiseOrValue<string>;
+    useHbarsForPayment: PromiseOrValue<boolean>;
+    useCurrentTokenForPayment: PromiseOrValue<boolean>;
+    feeCollector: PromiseOrValue<string>;
   };
 
   export type FixedFeeStructOutput = [
@@ -125,12 +126,12 @@ export declare namespace IHederaTokenService {
   };
 
   export type FractionalFeeStruct = {
-    numerator: BigNumberish;
-    denominator: BigNumberish;
-    minimumAmount: BigNumberish;
-    maximumAmount: BigNumberish;
-    netOfTransfers: boolean;
-    feeCollector: string;
+    numerator: PromiseOrValue<BigNumberish>;
+    denominator: PromiseOrValue<BigNumberish>;
+    minimumAmount: PromiseOrValue<BigNumberish>;
+    maximumAmount: PromiseOrValue<BigNumberish>;
+    netOfTransfers: PromiseOrValue<boolean>;
+    feeCollector: PromiseOrValue<string>;
   };
 
   export type FractionalFeeStructOutput = [
@@ -150,12 +151,12 @@ export declare namespace IHederaTokenService {
   };
 
   export type RoyaltyFeeStruct = {
-    numerator: BigNumberish;
-    denominator: BigNumberish;
-    amount: BigNumberish;
-    tokenId: string;
-    useHbarsForPayment: boolean;
-    feeCollector: string;
+    numerator: PromiseOrValue<BigNumberish>;
+    denominator: PromiseOrValue<BigNumberish>;
+    amount: PromiseOrValue<BigNumberish>;
+    tokenId: PromiseOrValue<string>;
+    useHbarsForPayment: PromiseOrValue<boolean>;
+    feeCollector: PromiseOrValue<string>;
   };
 
   export type RoyaltyFeeStructOutput = [
@@ -175,9 +176,9 @@ export declare namespace IHederaTokenService {
   };
 
   export type AccountAmountStruct = {
-    accountID: string;
-    amount: BigNumberish;
-    isApproval: boolean;
+    accountID: PromiseOrValue<string>;
+    amount: PromiseOrValue<BigNumberish>;
+    isApproval: PromiseOrValue<boolean>;
   };
 
   export type AccountAmountStructOutput = [string, BigNumber, boolean] & {
@@ -195,10 +196,10 @@ export declare namespace IHederaTokenService {
   ] & { transfers: IHederaTokenService.AccountAmountStructOutput[] };
 
   export type NftTransferStruct = {
-    senderAccountID: string;
-    receiverAccountID: string;
-    serialNumber: BigNumberish;
-    isApproval: boolean;
+    senderAccountID: PromiseOrValue<string>;
+    receiverAccountID: PromiseOrValue<string>;
+    serialNumber: PromiseOrValue<BigNumberish>;
+    isApproval: PromiseOrValue<boolean>;
   };
 
   export type NftTransferStructOutput = [string, string, BigNumber, boolean] & {
@@ -209,7 +210,7 @@ export declare namespace IHederaTokenService {
   };
 
   export type TokenTransferListStruct = {
-    token: string;
+    token: PromiseOrValue<string>;
     transfers: IHederaTokenService.AccountAmountStruct[];
     nftTransfers: IHederaTokenService.NftTransferStruct[];
   };
@@ -226,14 +227,14 @@ export declare namespace IHederaTokenService {
 
   export type TokenInfoStruct = {
     token: IHederaTokenService.HederaTokenStruct;
-    totalSupply: BigNumberish;
-    deleted: boolean;
-    defaultKycStatus: boolean;
-    pauseStatus: boolean;
+    totalSupply: PromiseOrValue<BigNumberish>;
+    deleted: PromiseOrValue<boolean>;
+    defaultKycStatus: PromiseOrValue<boolean>;
+    pauseStatus: PromiseOrValue<boolean>;
     fixedFees: IHederaTokenService.FixedFeeStruct[];
     fractionalFees: IHederaTokenService.FractionalFeeStruct[];
     royaltyFees: IHederaTokenService.RoyaltyFeeStruct[];
-    ledgerId: string;
+    ledgerId: PromiseOrValue<string>;
   };
 
   export type TokenInfoStructOutput = [
@@ -260,7 +261,7 @@ export declare namespace IHederaTokenService {
 
   export type FungibleTokenInfoStruct = {
     tokenInfo: IHederaTokenService.TokenInfoStruct;
-    decimals: BigNumberish;
+    decimals: PromiseOrValue<BigNumberish>;
   };
 
   export type FungibleTokenInfoStructOutput = [
@@ -273,11 +274,11 @@ export declare namespace IHederaTokenService {
 
   export type NonFungibleTokenInfoStruct = {
     tokenInfo: IHederaTokenService.TokenInfoStruct;
-    serialNumber: BigNumberish;
-    ownerId: string;
-    creationTime: BigNumberish;
-    metadata: BytesLike;
-    spenderId: string;
+    serialNumber: PromiseOrValue<BigNumberish>;
+    ownerId: PromiseOrValue<string>;
+    creationTime: PromiseOrValue<BigNumberish>;
+    metadata: PromiseOrValue<BytesLike>;
+    spenderId: PromiseOrValue<string>;
   };
 
   export type NonFungibleTokenInfoStructOutput = [
@@ -403,38 +404,58 @@ export interface IHederaTokenServiceInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "allowance",
-    values: [string, string, string]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "approve",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "approveNFT",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "associateToken",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "associateTokens",
-    values: [string, string[]]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "burnToken",
-    values: [string, BigNumberish, BigNumberish[]]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "createFungibleToken",
-    values: [IHederaTokenService.HederaTokenStruct, BigNumberish, BigNumberish]
+    values: [
+      IHederaTokenService.HederaTokenStruct,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "createFungibleTokenWithCustomFees",
     values: [
       IHederaTokenService.HederaTokenStruct,
-      BigNumberish,
-      BigNumberish,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BigNumberish>,
       IHederaTokenService.FixedFeeStruct[],
       IHederaTokenService.FractionalFeeStruct[]
     ]
@@ -458,144 +479,202 @@ export interface IHederaTokenServiceInterface extends utils.Interface {
       IHederaTokenService.TokenTransferListStruct[]
     ]
   ): string;
-  encodeFunctionData(functionFragment: "deleteToken", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "deleteToken",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "dissociateToken",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "dissociateTokens",
-    values: [string, string[]]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>[]]
   ): string;
   encodeFunctionData(
     functionFragment: "freezeToken",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getApproved",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getFungibleTokenInfo",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getNonFungibleTokenInfo",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenCustomFees",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenDefaultFreezeStatus",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenDefaultKycStatus",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenExpiryInfo",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenInfo",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenKey",
-    values: [string, BigNumberish]
+    values: [PromiseOrValue<string>, PromiseOrValue<BigNumberish>]
   ): string;
   encodeFunctionData(
     functionFragment: "getTokenType",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "grantTokenKyc",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
-    values: [string, string, string]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "isFrozen",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "isKyc",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
-  encodeFunctionData(functionFragment: "isToken", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "isToken",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "mintToken",
-    values: [string, BigNumberish, BytesLike[]]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>,
+      PromiseOrValue<BytesLike>[]
+    ]
   ): string;
-  encodeFunctionData(functionFragment: "pauseToken", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "pauseToken",
+    values: [PromiseOrValue<string>]
+  ): string;
   encodeFunctionData(
     functionFragment: "redirectForToken",
-    values: [string, BytesLike]
+    values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "revokeTokenKyc",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
-    values: [string, string, boolean]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<boolean>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferFrom",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferFromNFT",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferNFT",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferNFTs",
-    values: [string, string[], string[], BigNumberish[]]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferToken",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferTokens",
-    values: [string, string[], BigNumberish[]]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>[],
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "unfreezeToken",
-    values: [string, string]
+    values: [PromiseOrValue<string>, PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "unpauseToken",
-    values: [string]
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "updateTokenExpiryInfo",
-    values: [string, IHederaTokenService.ExpiryStruct]
+    values: [PromiseOrValue<string>, IHederaTokenService.ExpiryStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "updateTokenInfo",
-    values: [string, IHederaTokenService.HederaTokenStruct]
+    values: [PromiseOrValue<string>, IHederaTokenService.HederaTokenStruct]
   ): string;
   encodeFunctionData(
     functionFragment: "updateTokenKeys",
-    values: [string, IHederaTokenService.TokenKeyStruct[]]
+    values: [PromiseOrValue<string>, IHederaTokenService.TokenKeyStruct[]]
   ): string;
   encodeFunctionData(
     functionFragment: "wipeTokenAccount",
-    values: [string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "wipeTokenAccountNFT",
-    values: [string, string, BigNumberish[]]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>[]
+    ]
   ): string;
 
   decodeFunctionResult(functionFragment: "allowance", data: BytesLike): Result;
@@ -795,648 +874,648 @@ export interface IHederaTokenService extends BaseContract {
 
   functions: {
     allowance(
-      token: string,
-      owner: string,
-      spender: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     approve(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     approveNFT(
-      token: string,
-      approved: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      approved: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     associateToken(
-      account: string,
-      token: string,
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     associateTokens(
-      account: string,
-      tokens: string[],
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     burnToken(
-      token: string,
-      amount: BigNumberish,
-      serialNumbers: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      serialNumbers: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createFungibleToken(
       token: IHederaTokenService.HederaTokenStruct,
-      initialTotalSupply: BigNumberish,
-      decimals: BigNumberish,
-      overrides?: PayableOverrides & { from?: string }
+      initialTotalSupply: PromiseOrValue<BigNumberish>,
+      decimals: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createFungibleTokenWithCustomFees(
       token: IHederaTokenService.HederaTokenStruct,
-      initialTotalSupply: BigNumberish,
-      decimals: BigNumberish,
+      initialTotalSupply: PromiseOrValue<BigNumberish>,
+      decimals: PromiseOrValue<BigNumberish>,
       fixedFees: IHederaTokenService.FixedFeeStruct[],
       fractionalFees: IHederaTokenService.FractionalFeeStruct[],
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createNonFungibleToken(
       token: IHederaTokenService.HederaTokenStruct,
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     createNonFungibleTokenWithCustomFees(
       token: IHederaTokenService.HederaTokenStruct,
       fixedFees: IHederaTokenService.FixedFeeStruct[],
       royaltyFees: IHederaTokenService.RoyaltyFeeStruct[],
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     cryptoTransfer(
       transferList: IHederaTokenService.TransferListStruct,
       tokenTransfers: IHederaTokenService.TokenTransferListStruct[],
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     deleteToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     dissociateToken(
-      account: string,
-      token: string,
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     dissociateTokens(
-      account: string,
-      tokens: string[],
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     freezeToken(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getApproved(
-      token: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getFungibleTokenInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getNonFungibleTokenInfo(
-      token: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getTokenCustomFees(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getTokenDefaultFreezeStatus(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getTokenDefaultKycStatus(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getTokenExpiryInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getTokenInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getTokenKey(
-      token: string,
-      keyType: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      keyType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     getTokenType(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     grantTokenKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     isApprovedForAll(
-      token: string,
-      owner: string,
-      operator: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      operator: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     isFrozen(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     isKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     isToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     mintToken(
-      token: string,
-      amount: BigNumberish,
-      metadata: BytesLike[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      metadata: PromiseOrValue<BytesLike>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     pauseToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     revokeTokenKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     setApprovalForAll(
-      token: string,
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferNFT(
-      token: string,
-      sender: string,
-      recipient: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferNFTs(
-      token: string,
-      sender: string[],
-      receiver: string[],
-      serialNumber: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>[],
+      receiver: PromiseOrValue<string>[],
+      serialNumber: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferToken(
-      token: string,
-      sender: string,
-      recipient: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferTokens(
-      token: string,
-      accountId: string[],
-      amount: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      accountId: PromiseOrValue<string>[],
+      amount: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     unfreezeToken(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     unpauseToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     updateTokenExpiryInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       expiryInfo: IHederaTokenService.ExpiryStruct,
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     updateTokenInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       tokenInfo: IHederaTokenService.HederaTokenStruct,
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     updateTokenKeys(
-      token: string,
+      token: PromiseOrValue<string>,
       keys: IHederaTokenService.TokenKeyStruct[],
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     wipeTokenAccount(
-      token: string,
-      account: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     wipeTokenAccountNFT(
-      token: string,
-      account: string,
-      serialNumbers: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      serialNumbers: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   allowance(
-    token: string,
-    owner: string,
-    spender: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    owner: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   approve(
-    token: string,
-    spender: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    spender: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   approveNFT(
-    token: string,
-    approved: string,
-    serialNumber: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    approved: PromiseOrValue<string>,
+    serialNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   associateToken(
-    account: string,
-    token: string,
-    overrides?: Overrides & { from?: string }
+    account: PromiseOrValue<string>,
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   associateTokens(
-    account: string,
-    tokens: string[],
-    overrides?: Overrides & { from?: string }
+    account: PromiseOrValue<string>,
+    tokens: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   burnToken(
-    token: string,
-    amount: BigNumberish,
-    serialNumbers: BigNumberish[],
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    serialNumbers: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createFungibleToken(
     token: IHederaTokenService.HederaTokenStruct,
-    initialTotalSupply: BigNumberish,
-    decimals: BigNumberish,
-    overrides?: PayableOverrides & { from?: string }
+    initialTotalSupply: PromiseOrValue<BigNumberish>,
+    decimals: PromiseOrValue<BigNumberish>,
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createFungibleTokenWithCustomFees(
     token: IHederaTokenService.HederaTokenStruct,
-    initialTotalSupply: BigNumberish,
-    decimals: BigNumberish,
+    initialTotalSupply: PromiseOrValue<BigNumberish>,
+    decimals: PromiseOrValue<BigNumberish>,
     fixedFees: IHederaTokenService.FixedFeeStruct[],
     fractionalFees: IHederaTokenService.FractionalFeeStruct[],
-    overrides?: PayableOverrides & { from?: string }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createNonFungibleToken(
     token: IHederaTokenService.HederaTokenStruct,
-    overrides?: PayableOverrides & { from?: string }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   createNonFungibleTokenWithCustomFees(
     token: IHederaTokenService.HederaTokenStruct,
     fixedFees: IHederaTokenService.FixedFeeStruct[],
     royaltyFees: IHederaTokenService.RoyaltyFeeStruct[],
-    overrides?: PayableOverrides & { from?: string }
+    overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   cryptoTransfer(
     transferList: IHederaTokenService.TransferListStruct,
     tokenTransfers: IHederaTokenService.TokenTransferListStruct[],
-    overrides?: Overrides & { from?: string }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   deleteToken(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   dissociateToken(
-    account: string,
-    token: string,
-    overrides?: Overrides & { from?: string }
+    account: PromiseOrValue<string>,
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   dissociateTokens(
-    account: string,
-    tokens: string[],
-    overrides?: Overrides & { from?: string }
+    account: PromiseOrValue<string>,
+    tokens: PromiseOrValue<string>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   freezeToken(
-    token: string,
-    account: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getApproved(
-    token: string,
-    serialNumber: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    serialNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getFungibleTokenInfo(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getNonFungibleTokenInfo(
-    token: string,
-    serialNumber: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    serialNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getTokenCustomFees(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getTokenDefaultFreezeStatus(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getTokenDefaultKycStatus(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getTokenExpiryInfo(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getTokenInfo(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getTokenKey(
-    token: string,
-    keyType: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    keyType: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   getTokenType(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   grantTokenKyc(
-    token: string,
-    account: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   isApprovedForAll(
-    token: string,
-    owner: string,
-    operator: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    owner: PromiseOrValue<string>,
+    operator: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   isFrozen(
-    token: string,
-    account: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   isKyc(
-    token: string,
-    account: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   isToken(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   mintToken(
-    token: string,
-    amount: BigNumberish,
-    metadata: BytesLike[],
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    metadata: PromiseOrValue<BytesLike>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   pauseToken(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   redirectForToken(
-    token: string,
-    encodedFunctionSelector: BytesLike,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    encodedFunctionSelector: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   revokeTokenKyc(
-    token: string,
-    account: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   setApprovalForAll(
-    token: string,
-    operator: string,
-    approved: boolean,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    operator: PromiseOrValue<string>,
+    approved: PromiseOrValue<boolean>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferFrom(
-    token: string,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferFromNFT(
-    token: string,
-    from: string,
-    to: string,
-    serialNumber: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    serialNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferNFT(
-    token: string,
-    sender: string,
-    recipient: string,
-    serialNumber: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    sender: PromiseOrValue<string>,
+    recipient: PromiseOrValue<string>,
+    serialNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferNFTs(
-    token: string,
-    sender: string[],
-    receiver: string[],
-    serialNumber: BigNumberish[],
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    sender: PromiseOrValue<string>[],
+    receiver: PromiseOrValue<string>[],
+    serialNumber: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferToken(
-    token: string,
-    sender: string,
-    recipient: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    sender: PromiseOrValue<string>,
+    recipient: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferTokens(
-    token: string,
-    accountId: string[],
-    amount: BigNumberish[],
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    accountId: PromiseOrValue<string>[],
+    amount: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   unfreezeToken(
-    token: string,
-    account: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   unpauseToken(
-    token: string,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   updateTokenExpiryInfo(
-    token: string,
+    token: PromiseOrValue<string>,
     expiryInfo: IHederaTokenService.ExpiryStruct,
-    overrides?: Overrides & { from?: string }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   updateTokenInfo(
-    token: string,
+    token: PromiseOrValue<string>,
     tokenInfo: IHederaTokenService.HederaTokenStruct,
-    overrides?: Overrides & { from?: string }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   updateTokenKeys(
-    token: string,
+    token: PromiseOrValue<string>,
     keys: IHederaTokenService.TokenKeyStruct[],
-    overrides?: Overrides & { from?: string }
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   wipeTokenAccount(
-    token: string,
-    account: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   wipeTokenAccountNFT(
-    token: string,
-    account: string,
-    serialNumbers: BigNumberish[],
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    account: PromiseOrValue<string>,
+    serialNumbers: PromiseOrValue<BigNumberish>[],
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     allowance(
-      token: string,
-      owner: string,
-      spender: string,
+      token: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & { responseCode: BigNumber; allowance: BigNumber }
     >;
 
     approve(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     approveNFT(
-      token: string,
-      approved: string,
-      serialNumber: BigNumberish,
+      token: PromiseOrValue<string>,
+      approved: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     associateToken(
-      account: string,
-      token: string,
+      account: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     associateTokens(
-      account: string,
-      tokens: string[],
+      account: PromiseOrValue<string>,
+      tokens: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     burnToken(
-      token: string,
-      amount: BigNumberish,
-      serialNumbers: BigNumberish[],
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      serialNumbers: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber] & {
@@ -1447,8 +1526,8 @@ export interface IHederaTokenService extends BaseContract {
 
     createFungibleToken(
       token: IHederaTokenService.HederaTokenStruct,
-      initialTotalSupply: BigNumberish,
-      decimals: BigNumberish,
+      initialTotalSupply: PromiseOrValue<BigNumberish>,
+      decimals: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, string] & { responseCode: BigNumber; tokenAddress: string }
@@ -1456,8 +1535,8 @@ export interface IHederaTokenService extends BaseContract {
 
     createFungibleTokenWithCustomFees(
       token: IHederaTokenService.HederaTokenStruct,
-      initialTotalSupply: BigNumberish,
-      decimals: BigNumberish,
+      initialTotalSupply: PromiseOrValue<BigNumberish>,
+      decimals: PromiseOrValue<BigNumberish>,
       fixedFees: IHederaTokenService.FixedFeeStruct[],
       fractionalFees: IHederaTokenService.FractionalFeeStruct[],
       overrides?: CallOverrides
@@ -1487,36 +1566,39 @@ export interface IHederaTokenService extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    deleteToken(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    deleteToken(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     dissociateToken(
-      account: string,
-      token: string,
+      account: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     dissociateTokens(
-      account: string,
-      tokens: string[],
+      account: PromiseOrValue<string>,
+      tokens: PromiseOrValue<string>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     freezeToken(
-      token: string,
-      account: string,
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     getApproved(
-      token: string,
-      serialNumber: BigNumberish,
+      token: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, string] & { responseCode: BigNumber; approved: string }
     >;
 
     getFungibleTokenInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, IHederaTokenService.FungibleTokenInfoStructOutput] & {
@@ -1526,8 +1608,8 @@ export interface IHederaTokenService extends BaseContract {
     >;
 
     getNonFungibleTokenInfo(
-      token: string,
-      serialNumber: BigNumberish,
+      token: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, IHederaTokenService.NonFungibleTokenInfoStructOutput] & {
@@ -1537,7 +1619,7 @@ export interface IHederaTokenService extends BaseContract {
     >;
 
     getTokenCustomFees(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [
@@ -1554,7 +1636,7 @@ export interface IHederaTokenService extends BaseContract {
     >;
 
     getTokenDefaultFreezeStatus(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, boolean] & {
@@ -1564,7 +1646,7 @@ export interface IHederaTokenService extends BaseContract {
     >;
 
     getTokenDefaultKycStatus(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, boolean] & {
@@ -1574,7 +1656,7 @@ export interface IHederaTokenService extends BaseContract {
     >;
 
     getTokenExpiryInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, IHederaTokenService.ExpiryStructOutput] & {
@@ -1584,7 +1666,7 @@ export interface IHederaTokenService extends BaseContract {
     >;
 
     getTokenInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, IHederaTokenService.TokenInfoStructOutput] & {
@@ -1594,8 +1676,8 @@ export interface IHederaTokenService extends BaseContract {
     >;
 
     getTokenKey(
-      token: string,
-      keyType: BigNumberish,
+      token: PromiseOrValue<string>,
+      keyType: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, IHederaTokenService.KeyValueStructOutput] & {
@@ -1605,54 +1687,54 @@ export interface IHederaTokenService extends BaseContract {
     >;
 
     getTokenType(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, number] & { responseCode: BigNumber; tokenType: number }
     >;
 
     grantTokenKyc(
-      token: string,
-      account: string,
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     isApprovedForAll(
-      token: string,
-      owner: string,
-      operator: string,
+      token: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      operator: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, boolean] & { responseCode: BigNumber; approved: boolean }
     >;
 
     isFrozen(
-      token: string,
-      account: string,
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, boolean] & { responseCode: BigNumber; frozen: boolean }
     >;
 
     isKyc(
-      token: string,
-      account: string,
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, boolean] & { responseCode: BigNumber; kycGranted: boolean }
     >;
 
     isToken(
-      token: string,
+      token: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, boolean] & { responseCode: BigNumber; isToken: boolean }
     >;
 
     mintToken(
-      token: string,
-      amount: BigNumberish,
-      metadata: BytesLike[],
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      metadata: PromiseOrValue<BytesLike>[],
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, BigNumber, BigNumber[]] & {
@@ -1662,113 +1744,119 @@ export interface IHederaTokenService extends BaseContract {
       }
     >;
 
-    pauseToken(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    pauseToken(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, string] & { responseCode: BigNumber; response: string }
     >;
 
     revokeTokenKyc(
-      token: string,
-      account: string,
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     setApprovalForAll(
-      token: string,
-      operator: string,
-      approved: boolean,
+      token: PromiseOrValue<string>,
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferNFT(
-      token: string,
-      sender: string,
-      recipient: string,
-      serialNumber: BigNumberish,
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferNFTs(
-      token: string,
-      sender: string[],
-      receiver: string[],
-      serialNumber: BigNumberish[],
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>[],
+      receiver: PromiseOrValue<string>[],
+      serialNumber: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferToken(
-      token: string,
-      sender: string,
-      recipient: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferTokens(
-      token: string,
-      accountId: string[],
-      amount: BigNumberish[],
+      token: PromiseOrValue<string>,
+      accountId: PromiseOrValue<string>[],
+      amount: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     unfreezeToken(
-      token: string,
-      account: string,
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    unpauseToken(token: string, overrides?: CallOverrides): Promise<BigNumber>;
+    unpauseToken(
+      token: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
 
     updateTokenExpiryInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       expiryInfo: IHederaTokenService.ExpiryStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     updateTokenInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       tokenInfo: IHederaTokenService.HederaTokenStruct,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     updateTokenKeys(
-      token: string,
+      token: PromiseOrValue<string>,
       keys: IHederaTokenService.TokenKeyStruct[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     wipeTokenAccount(
-      token: string,
-      account: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     wipeTokenAccountNFT(
-      token: string,
-      account: string,
-      serialNumbers: BigNumberish[],
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      serialNumbers: PromiseOrValue<BigNumberish>[],
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -1777,607 +1865,607 @@ export interface IHederaTokenService extends BaseContract {
 
   estimateGas: {
     allowance(
-      token: string,
-      owner: string,
-      spender: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     approve(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     approveNFT(
-      token: string,
-      approved: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      approved: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     associateToken(
-      account: string,
-      token: string,
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     associateTokens(
-      account: string,
-      tokens: string[],
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     burnToken(
-      token: string,
-      amount: BigNumberish,
-      serialNumbers: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      serialNumbers: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createFungibleToken(
       token: IHederaTokenService.HederaTokenStruct,
-      initialTotalSupply: BigNumberish,
-      decimals: BigNumberish,
-      overrides?: PayableOverrides & { from?: string }
+      initialTotalSupply: PromiseOrValue<BigNumberish>,
+      decimals: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createFungibleTokenWithCustomFees(
       token: IHederaTokenService.HederaTokenStruct,
-      initialTotalSupply: BigNumberish,
-      decimals: BigNumberish,
+      initialTotalSupply: PromiseOrValue<BigNumberish>,
+      decimals: PromiseOrValue<BigNumberish>,
       fixedFees: IHederaTokenService.FixedFeeStruct[],
       fractionalFees: IHederaTokenService.FractionalFeeStruct[],
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createNonFungibleToken(
       token: IHederaTokenService.HederaTokenStruct,
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     createNonFungibleTokenWithCustomFees(
       token: IHederaTokenService.HederaTokenStruct,
       fixedFees: IHederaTokenService.FixedFeeStruct[],
       royaltyFees: IHederaTokenService.RoyaltyFeeStruct[],
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     cryptoTransfer(
       transferList: IHederaTokenService.TransferListStruct,
       tokenTransfers: IHederaTokenService.TokenTransferListStruct[],
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     deleteToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     dissociateToken(
-      account: string,
-      token: string,
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     dissociateTokens(
-      account: string,
-      tokens: string[],
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     freezeToken(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getApproved(
-      token: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getFungibleTokenInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getNonFungibleTokenInfo(
-      token: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getTokenCustomFees(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getTokenDefaultFreezeStatus(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getTokenDefaultKycStatus(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getTokenExpiryInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getTokenInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getTokenKey(
-      token: string,
-      keyType: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      keyType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     getTokenType(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     grantTokenKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     isApprovedForAll(
-      token: string,
-      owner: string,
-      operator: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      operator: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     isFrozen(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     isKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     isToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     mintToken(
-      token: string,
-      amount: BigNumberish,
-      metadata: BytesLike[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      metadata: PromiseOrValue<BytesLike>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     pauseToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     revokeTokenKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     setApprovalForAll(
-      token: string,
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferNFT(
-      token: string,
-      sender: string,
-      recipient: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferNFTs(
-      token: string,
-      sender: string[],
-      receiver: string[],
-      serialNumber: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>[],
+      receiver: PromiseOrValue<string>[],
+      serialNumber: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferToken(
-      token: string,
-      sender: string,
-      recipient: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferTokens(
-      token: string,
-      accountId: string[],
-      amount: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      accountId: PromiseOrValue<string>[],
+      amount: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     unfreezeToken(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     unpauseToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     updateTokenExpiryInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       expiryInfo: IHederaTokenService.ExpiryStruct,
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     updateTokenInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       tokenInfo: IHederaTokenService.HederaTokenStruct,
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     updateTokenKeys(
-      token: string,
+      token: PromiseOrValue<string>,
       keys: IHederaTokenService.TokenKeyStruct[],
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     wipeTokenAccount(
-      token: string,
-      account: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     wipeTokenAccountNFT(
-      token: string,
-      account: string,
-      serialNumbers: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      serialNumbers: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     allowance(
-      token: string,
-      owner: string,
-      spender: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     approve(
-      token: string,
-      spender: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      spender: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     approveNFT(
-      token: string,
-      approved: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      approved: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     associateToken(
-      account: string,
-      token: string,
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     associateTokens(
-      account: string,
-      tokens: string[],
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     burnToken(
-      token: string,
-      amount: BigNumberish,
-      serialNumbers: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      serialNumbers: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createFungibleToken(
       token: IHederaTokenService.HederaTokenStruct,
-      initialTotalSupply: BigNumberish,
-      decimals: BigNumberish,
-      overrides?: PayableOverrides & { from?: string }
+      initialTotalSupply: PromiseOrValue<BigNumberish>,
+      decimals: PromiseOrValue<BigNumberish>,
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createFungibleTokenWithCustomFees(
       token: IHederaTokenService.HederaTokenStruct,
-      initialTotalSupply: BigNumberish,
-      decimals: BigNumberish,
+      initialTotalSupply: PromiseOrValue<BigNumberish>,
+      decimals: PromiseOrValue<BigNumberish>,
       fixedFees: IHederaTokenService.FixedFeeStruct[],
       fractionalFees: IHederaTokenService.FractionalFeeStruct[],
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createNonFungibleToken(
       token: IHederaTokenService.HederaTokenStruct,
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     createNonFungibleTokenWithCustomFees(
       token: IHederaTokenService.HederaTokenStruct,
       fixedFees: IHederaTokenService.FixedFeeStruct[],
       royaltyFees: IHederaTokenService.RoyaltyFeeStruct[],
-      overrides?: PayableOverrides & { from?: string }
+      overrides?: PayableOverrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     cryptoTransfer(
       transferList: IHederaTokenService.TransferListStruct,
       tokenTransfers: IHederaTokenService.TokenTransferListStruct[],
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     deleteToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     dissociateToken(
-      account: string,
-      token: string,
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     dissociateTokens(
-      account: string,
-      tokens: string[],
-      overrides?: Overrides & { from?: string }
+      account: PromiseOrValue<string>,
+      tokens: PromiseOrValue<string>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     freezeToken(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getApproved(
-      token: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getFungibleTokenInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getNonFungibleTokenInfo(
-      token: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getTokenCustomFees(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getTokenDefaultFreezeStatus(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getTokenDefaultKycStatus(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getTokenExpiryInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getTokenInfo(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getTokenKey(
-      token: string,
-      keyType: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      keyType: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     getTokenType(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     grantTokenKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
-      token: string,
-      owner: string,
-      operator: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      owner: PromiseOrValue<string>,
+      operator: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isFrozen(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     isToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     mintToken(
-      token: string,
-      amount: BigNumberish,
-      metadata: BytesLike[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      metadata: PromiseOrValue<BytesLike>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     pauseToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     revokeTokenKyc(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     setApprovalForAll(
-      token: string,
-      operator: string,
-      approved: boolean,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      operator: PromiseOrValue<string>,
+      approved: PromiseOrValue<boolean>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferNFT(
-      token: string,
-      sender: string,
-      recipient: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferNFTs(
-      token: string,
-      sender: string[],
-      receiver: string[],
-      serialNumber: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>[],
+      receiver: PromiseOrValue<string>[],
+      serialNumber: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferToken(
-      token: string,
-      sender: string,
-      recipient: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      sender: PromiseOrValue<string>,
+      recipient: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferTokens(
-      token: string,
-      accountId: string[],
-      amount: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      accountId: PromiseOrValue<string>[],
+      amount: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     unfreezeToken(
-      token: string,
-      account: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     unpauseToken(
-      token: string,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     updateTokenExpiryInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       expiryInfo: IHederaTokenService.ExpiryStruct,
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     updateTokenInfo(
-      token: string,
+      token: PromiseOrValue<string>,
       tokenInfo: IHederaTokenService.HederaTokenStruct,
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     updateTokenKeys(
-      token: string,
+      token: PromiseOrValue<string>,
       keys: IHederaTokenService.TokenKeyStruct[],
-      overrides?: Overrides & { from?: string }
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     wipeTokenAccount(
-      token: string,
-      account: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     wipeTokenAccountNFT(
-      token: string,
-      account: string,
-      serialNumbers: BigNumberish[],
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      account: PromiseOrValue<string>,
+      serialNumbers: PromiseOrValue<BigNumberish>[],
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

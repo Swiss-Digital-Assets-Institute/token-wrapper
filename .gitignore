@@ -131,3 +131,10 @@ dist
 
 .DS_Store
 package-lock.json
+
+# hardhat
+cache
+deployments
+node_modules
+cache/
+artifacts/build-info

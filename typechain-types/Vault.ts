@@ -24,11 +24,12 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "./common";
 
 export interface VaultInterface extends utils.Interface {
   functions: {
-    "associateFugibleToken(address)": FunctionFragment;
+    "associateFungibleToken(address)": FunctionFragment;
     "redirectForToken(address,bytes)": FunctionFragment;
     "transferFrom(address,address,address,uint256)": FunctionFragment;
     "transferFromNFT(address,address,address,uint256)": FunctionFragment;
@@ -37,7 +38,7 @@ export interface VaultInterface extends utils.Interface {
 
   getFunction(
     nameOrSignatureOrTopic:
-      | "associateFugibleToken"
+      | "associateFungibleToken"
       | "redirectForToken"
       | "transferFrom"
       | "transferFromNFT"
@@ -45,25 +46,38 @@ export interface VaultInterface extends utils.Interface {
   ): FunctionFragment;
 
   encodeFunctionData(
-    functionFragment: "associateFugibleToken",
-    values: [string]
+    functionFragment: "associateFungibleToken",
+    values: [PromiseOrValue<string>]
   ): string;
   encodeFunctionData(
     functionFragment: "redirectForToken",
-    values: [string, BytesLike]
+    values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "transferFrom",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferFromNFT",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
-  encodeFunctionData(functionFragment: "withdraw", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "withdraw",
+    values: [PromiseOrValue<string>]
+  ): string;
 
   decodeFunctionResult(
-    functionFragment: "associateFugibleToken",
+    functionFragment: "associateFungibleToken",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -126,102 +140,105 @@ export interface Vault extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
-    associateFugibleToken(
-      tokenAddr: string,
-      overrides?: Overrides & { from?: string }
+    associateFungibleToken(
+      tokenAddr: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     withdraw(
-      tokenId: string,
-      overrides?: Overrides & { from?: string }
+      tokenId: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
-  associateFugibleToken(
-    tokenAddr: string,
-    overrides?: Overrides & { from?: string }
+  associateFungibleToken(
+    tokenAddr: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   redirectForToken(
-    token: string,
-    encodedFunctionSelector: BytesLike,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    encodedFunctionSelector: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferFrom(
-    token: string,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferFromNFT(
-    token: string,
-    from: string,
-    to: string,
-    serialNumber: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    serialNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   withdraw(
-    tokenId: string,
-    overrides?: Overrides & { from?: string }
+    tokenId: PromiseOrValue<string>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    associateFugibleToken(
-      tokenAddr: string,
+    associateFungibleToken(
+      tokenAddr: PromiseOrValue<string>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, string] & { responseCode: BigNumber; response: string }
     >;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
-    withdraw(tokenId: string, overrides?: CallOverrides): Promise<void>;
+    withdraw(
+      tokenId: PromiseOrValue<string>,
+      overrides?: CallOverrides
+    ): Promise<void>;
   };
 
   filters: {
@@ -233,70 +250,70 @@ export interface Vault extends BaseContract {
   };
 
   estimateGas: {
-    associateFugibleToken(
-      tokenAddr: string,
-      overrides?: Overrides & { from?: string }
+    associateFungibleToken(
+      tokenAddr: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     withdraw(
-      tokenId: string,
-      overrides?: Overrides & { from?: string }
+      tokenId: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
-    associateFugibleToken(
-      tokenAddr: string,
-      overrides?: Overrides & { from?: string }
+    associateFungibleToken(
+      tokenAddr: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     withdraw(
-      tokenId: string,
-      overrides?: Overrides & { from?: string }
+      tokenId: PromiseOrValue<string>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

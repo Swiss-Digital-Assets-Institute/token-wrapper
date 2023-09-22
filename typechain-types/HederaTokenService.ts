@@ -24,6 +24,7 @@ import type {
   TypedEvent,
   TypedListener,
   OnEvent,
+  PromiseOrValue,
 } from "./common";
 
 export interface HederaTokenServiceInterface extends utils.Interface {
@@ -42,15 +43,25 @@ export interface HederaTokenServiceInterface extends utils.Interface {
 
   encodeFunctionData(
     functionFragment: "redirectForToken",
-    values: [string, BytesLike]
+    values: [PromiseOrValue<string>, PromiseOrValue<BytesLike>]
   ): string;
   encodeFunctionData(
     functionFragment: "transferFrom",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
   encodeFunctionData(
     functionFragment: "transferFromNFT",
-    values: [string, string, string, BigNumberish]
+    values: [
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<string>,
+      PromiseOrValue<BigNumberish>
+    ]
   ): string;
 
   decodeFunctionResult(
@@ -113,72 +124,72 @@ export interface HederaTokenService extends BaseContract {
 
   functions: {
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<ContractTransaction>;
   };
 
   redirectForToken(
-    token: string,
-    encodedFunctionSelector: BytesLike,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    encodedFunctionSelector: PromiseOrValue<BytesLike>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferFrom(
-    token: string,
-    from: string,
-    to: string,
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    amount: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   transferFromNFT(
-    token: string,
-    from: string,
-    to: string,
-    serialNumber: BigNumberish,
-    overrides?: Overrides & { from?: string }
+    token: PromiseOrValue<string>,
+    from: PromiseOrValue<string>,
+    to: PromiseOrValue<string>,
+    serialNumber: PromiseOrValue<BigNumberish>,
+    overrides?: Overrides & { from?: PromiseOrValue<string> }
   ): Promise<ContractTransaction>;
 
   callStatic: {
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
       overrides?: CallOverrides
     ): Promise<
       [BigNumber, string] & { responseCode: BigNumber; response: string }
     >;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
   };
@@ -193,49 +204,49 @@ export interface HederaTokenService extends BaseContract {
 
   estimateGas: {
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<BigNumber>;
   };
 
   populateTransaction: {
     redirectForToken(
-      token: string,
-      encodedFunctionSelector: BytesLike,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      encodedFunctionSelector: PromiseOrValue<BytesLike>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferFrom(
-      token: string,
-      from: string,
-      to: string,
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      amount: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
 
     transferFromNFT(
-      token: string,
-      from: string,
-      to: string,
-      serialNumber: BigNumberish,
-      overrides?: Overrides & { from?: string }
+      token: PromiseOrValue<string>,
+      from: PromiseOrValue<string>,
+      to: PromiseOrValue<string>,
+      serialNumber: PromiseOrValue<BigNumberish>,
+      overrides?: Overrides & { from?: PromiseOrValue<string> }
     ): Promise<PopulatedTransaction>;
   };
 }

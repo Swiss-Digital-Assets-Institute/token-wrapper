@@ -11,7 +11,7 @@ contract Vault is HederaTokenService {
     /// Associates the token with the vault contract
     /// @param tokenAddr The address of the token to associate
     /// @return responseCode The response code of the Hedera Token Service
-    function associateFugibleToken(address tokenAddr) external  returns (int){
+    function associateFungibleToken(address tokenAddr) external  returns (int){
         int responseCode = HederaTokenService.associateToken(address(this), tokenAddr);
 
         require(responseCode == HederaResponseCodes.SUCCESS, "Associate Token failed");

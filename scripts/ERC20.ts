@@ -3,8 +3,8 @@ import { AccountId, PrivateKey, TokenAssociateTransaction, Client, AccountBalanc
 import { ethers } from "ethers";
 import { createFungibleToken, createAccount, deployContract } from "./utils";
 
-import { ERC20__factory } from '../types/ethers-contracts/factories/ERC20__factory';
-import { Vault__factory } from '../types/ethers-contracts/factories/Vault__factory';
+import { ERC20__factory } from '../typechain-types/factories/ERC20__factory';
+import { Vault__factory } from '../typechain-types/factories/Vault__factory';
 
 import { config } from "dotenv";
 
@@ -33,8 +33,8 @@ async function main() {
     console.log(`- Alice account id created: ${aliceAccountId!.toString()}`);
 
     // Take the address of the tokenId
-    const testTokenAddress = tokenId!.toSolidityAddress();
-    console.log(`- testTokenAddress`, testTokenAddress);
+    const tokenIdAddress = tokenId!.toSolidityAddress();
+    console.log(`- tokenIdAddress`, tokenIdAddress);
 
     // We connect to the ERC20 contract using typechain
     const account = wallet.connect(provider);
@@ -42,7 +42,7 @@ async function main() {
     console.log(`- accountAddress`, accountAddress);
 
     const contractERC20 = ERC20__factory.connect(
-        testTokenAddress,
+        tokenIdAddress,
         account
     );
 
@@ -69,8 +69,9 @@ async function main() {
     const tokenAssociateReceipt = await tokenAssociate.getReceipt(aliceClient);
     console.log(`- tokenAssociateReceipt ${tokenAssociateReceipt.status.toString()}`);
 
+    const aliceAccountAddress = aliceAccountId!.toSolidityAddress();
     // We transfer 10 tokens to Alice using the ERC20 contract
-    const transfer = await contractERC20.transfer(aliceAccountId!.toSolidityAddress(), 10, { gasLimit: 1000000 })
+    const transfer = await contractERC20.transfer(aliceAccountAddress, 10, { gasLimit: 1000000 })
     const transferReceiptWait = await transfer.wait();
     console.log(`- Transfer`, transferReceiptWait);
 
@@ -83,30 +84,30 @@ async function main() {
     console.log("- Balance from Alice using the SDK", balanceTokenSDK.toString());
 
     // We check the balance tokenId from Alice using the ERC20 contract
-    const balanceAliceERC20 = await contractERC20.balanceOf(aliceAccountId!.toSolidityAddress());
+    const balanceAliceERC20 = await contractERC20.balanceOf(aliceAccountAddress);
     console.log("- Balance from Alice using the ERC20", parseInt(balanceAliceERC20.toString()));
 
     // We associate the Vault contract with the token so we can transfer tokens to it
-    const associate = await contractVault.associateFugibleToken(testTokenAddress, { gasLimit: 1000000 })
+    const associate = await contractVault.associateFungibleToken(tokenIdAddress, { gasLimit: 1000000 })
     const associateReceipt = await associate.wait();
     console.log(`- Associate`, associateReceipt);
 
     // We deposit 1000 tokens to the Vault contract
-    const deposit = await contractERC20.transfer(contractVaultId!.toSolidityAddress(), 1000, { gasLimit: 1000000 })
+    const deposit = await contractERC20.transfer(contractVaultAddress, 1000, { gasLimit: 1000000 })
     const depositReceipt = await deposit.wait();
     console.log(`- Deposit tokens to the Vault contract`, depositReceipt);
 
     // We check the balance of the Vault contract after the deposit
-    let balanceVaultERC20 = await contractERC20.balanceOf(contractVaultId!.toSolidityAddress());
+    let balanceVaultERC20 = await contractERC20.balanceOf(contractVaultAddress);
     console.log(`- Balance of the Vault contract before the withdraw`, parseInt(balanceVaultERC20.toString()));
 
     // We withdraw 100 tokens from the Vault contract
-    const withdraw = await contractVault.withdraw(testTokenAddress, { gasLimit: 1000000 })
+    const withdraw = await contractVault.withdraw(tokenIdAddress, { gasLimit: 1000000 })
     const withdrawReceipt = await withdraw.wait();
     console.log(`- Withdraw tokens from the Vault contract`, withdrawReceipt);
 
     // We check again the balance of the Vault contract after the withdraw to see if it has changed
-    balanceVaultERC20 = await contractERC20.balanceOf(contractVaultId!.toSolidityAddress());
+    balanceVaultERC20 = await contractERC20.balanceOf(contractVaultAddress);
     console.log(`- Balance of the Vault contract after the withdraw`, parseInt(balanceVaultERC20.toString()));
 
 }
