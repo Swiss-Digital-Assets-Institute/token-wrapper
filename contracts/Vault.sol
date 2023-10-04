@@ -20,6 +20,7 @@ contract Vault is HederaTokenService {
     }
 
     /// Function to withdraw tokens from the vault contract
+    /// @param tokenId The token to withdraw
     function withdraw(address tokenId) public 
     {
         ERC20(tokenId).transfer(msg.sender, ERC20(tokenId).balanceOf(address(this)));

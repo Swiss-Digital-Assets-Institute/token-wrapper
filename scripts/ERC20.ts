@@ -14,11 +14,11 @@ config();
 const provider = new ethers.providers.JsonRpcProvider(process.env.JSON_RPC_RELAY_URL!);
 
 // Wallet to sign the transactions
-const wallet = new ethers.Wallet(process.env.ETH_PRIVATE_KEY!, provider);
+const wallet = new ethers.Wallet(process.env.HEX_ENCODED_PRIVATE_KEY!, provider);
 
 // Client to interact with the Hedera network
 const client = Client.forTestnet();
-const operatorPrKey = PrivateKey.fromStringECDSA(process.env.ETH_PRIVATE_KEY!);
+const operatorPrKey = PrivateKey.fromStringECDSA(process.env.HEX_ENCODED_PRIVATE_KEY!);
 const operatorAccountId = AccountId.fromString(process.env.OPERATOR_ID!);
 client.setOperator(operatorAccountId, operatorPrKey);
 
