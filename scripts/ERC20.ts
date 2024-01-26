@@ -19,7 +19,7 @@ const wallet = new ethers.Wallet(process.env.HEX_ENCODED_PRIVATE_KEY!, provider)
 // Client to interact with the Hedera network
 const client = Client.forTestnet();
 const operatorPrKey = PrivateKey.fromStringECDSA(process.env.HEX_ENCODED_PRIVATE_KEY!);
-const operatorAccountId = AccountId.fromString(process.env.OPERATOR_ID!);
+const operatorAccountId = AccountId.fromString(process.env.MY_ACCOUNT_ID!);
 client.setOperator(operatorAccountId, operatorPrKey);
 
 async function main() {
