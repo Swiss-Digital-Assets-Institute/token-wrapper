@@ -72,6 +72,7 @@ In this tutorial you’ll learn how to make Hedera native tokens work just like 
 
 - Basic understanding of [TypeScript](https://www.typescriptlang.org/) and [Solidity](https://docs.soliditylang.org/en/latest/).
 - Get a [Hedera testnet account](https://portal.hedera.com/register).
+- Have [ts-node](https://www.npmjs.com/package/ts-node) installed.
 
 ### Installation
 
@@ -91,7 +92,7 @@ In this step, you will update and configure your configuration file, so first re
 
 **Environment Variables**
 
-The `.env` file defines environment variables used in the project. The `OPERATOR_ID` and `OPERATOR_KEY` variables contains the *ECDSA* ***Account ID*** and ***DER Encoded Private Key,*** respectively for the Hedera Testnet account. The `HEX_ENCODED_PRIVATE_KEY` variable contains the ***HEX*** ***Encoded Private Key.***
+The `.env` file defines environment variables used in the project. The `MY_ACCOUNT_ID` and `MY_PRIVATE_KEY` variables contains the *ECDSA* ***Account ID*** and ***DER Encoded Private Key,*** respectively for the Hedera Testnet account. The `HEX_ENCODED_PRIVATE_KEY` variable contains the ***HEX*** ***Encoded Private Key.***
 
 The `JSON_RPC_RELAY_URL` variable contains the [HashIO](https://swirldslabs.com/hashio/) Testnet endpoint URL. This is the JSON-RPC instance that will submit the transactions to the Hedera test network to test, create and deploy your smart contract.
 
